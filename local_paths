@@ -14,3 +14,5 @@ if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 #
 # go用
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export PATH="$HOME/bin:$PATH"
+
