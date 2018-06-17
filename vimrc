@@ -107,6 +107,7 @@ if has("autocmd")
     autocmd FileType sass        setlocal sw=4 sts=4 ts=4 et
     autocmd FileType javascript  setlocal sw=4 sts=4 ts=4 et
     autocmd FileType yaml        setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType markdown  setlocal sw=4 sts=4 ts=4 et
 endif
 
 "----------------------------------------------------------
@@ -172,6 +173,7 @@ call dein#add('vim-ruby/vim-ruby')
 call dein#add('vim-scripts/AnsiEsc.vim')
 call dein#add('vim-scripts/grep.vim')
 call dein#add('tpope/vim-rails')
+call dein#add('scrooloose/syntastic')
 
 call dein#end()
 
@@ -239,7 +241,17 @@ let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
 autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 
 "rsenseのインストールフォルダがデフォルトと異なるので設定
-let g:rsenseHome = expand("/Users/natsuki/.rbenv/shims/rsense")
+let g:rsenseHome = expand("~/.rbenv/shims/rsense")
 let g:rsenseUseOmniFunc = 1
 " vim-markdownの設定
 let g:vim_markdown_folding_disabled = 1
+
+"rubocopを自動的, scrooloose/syntastic連携
+let g:syntastic_mode_map = { 'mode': 'active',
+            \ 'active_filetypes': ['ruby'] }
+let g:syntastic_ruby_checkers = ['rubocop']
+
+"matchit有効化
+if !exists('loaded_matchit')
+    runtime macros/matchit.vim
+endif
