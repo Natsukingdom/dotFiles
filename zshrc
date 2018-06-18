@@ -60,3 +60,8 @@ function rprompt-git-current-branch {
     echo "${branch_status}[$branch_name]"
 }
 
+# alias
+
+alias bexec='bundle exec'
+
+# /alias
