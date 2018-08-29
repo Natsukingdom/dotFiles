@@ -105,9 +105,9 @@ if has("autocmd")
     autocmd FileType css         setlocal sw=4 sts=4 ts=4 et
     autocmd FileType scss        setlocal sw=4 sts=4 ts=4 et
     autocmd FileType sass        setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType javascript  setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType javascript  setlocal sw=2 sts=2 ts=2 et
     autocmd FileType yaml        setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType markdown  setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType markdown    setlocal sw=2 sts=2 ts=2 et
 endif
 
 "----------------------------------------------------------
@@ -161,7 +161,7 @@ call dein#add('airblade/vim-gitgutter')
 call dein#add('godlygeek/tabular')
 call dein#add('kannokanno/previm')
 call dein#add('osyo-manga/vim-monster')
-call dein#add('plasticboy/vim-markdown')
+"call dein#add('plasticboy/vim-markdown')
 call dein#add('scrooloose/nerdtree')
 call dein#add('todesking/ruby_hl_lvar.vim')
 call dein#add('tomtom/tcomment_vim')
@@ -247,11 +247,22 @@ let g:rsenseUseOmniFunc = 1
 let g:vim_markdown_folding_disabled = 1
 
 "rubocopを自動的, scrooloose/syntastic連携
-let g:syntastic_mode_map = { 'mode': 'active',
-            \ 'active_filetypes': ['ruby'] }
+let g:syntastic_mode_map = { 'mode': 'passive',
+            \ 'passive_filetypes': ['ruby'] }
 let g:syntastic_ruby_checkers = ['rubocop']
 
 "matchit有効化
 if !exists('loaded_matchit')
     runtime macros/matchit.vim
 endif
+
+"http://yamitzky.hatenablog.com/entry/20111213/1323739808 の設定真似してみる。
+"erb の 埋め込み補完
+inoremap <expr> % Lt_Percent_Completion()
+function Lt_Percent_Completion()
+  if matchstr(getline('.'), '.', col('.') -1 ) == ">"
+		return "\%\%\<Left>"
+	else
+		return "\%"
+	end
+endf
