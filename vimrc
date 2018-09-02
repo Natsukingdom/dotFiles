@@ -174,6 +174,7 @@ call dein#add('vim-scripts/AnsiEsc.vim')
 call dein#add('vim-scripts/grep.vim')
 call dein#add('tpope/vim-rails')
 call dein#add('scrooloose/syntastic')
+call dein#add('fatih/vim-go')
 
 call dein#end()
 
