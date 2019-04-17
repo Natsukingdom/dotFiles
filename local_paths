@@ -1,8 +1,4 @@
 # .zshrc から source して 使用すること
-# mysql@5.6用
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-# chromedriver 用
-export PATH="/usr/local/Cellar/chromedriver/2.35/bin:$PATH"
 # rbenv 用
 export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -19,3 +15,5 @@ export PATH="$HOME/go/bin:$PATH"
 
 # nodebrew用
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+export PATH="$HOME/.exenv/bin:$PATH"
+eval "$(exenv init -)"

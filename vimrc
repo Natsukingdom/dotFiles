@@ -176,6 +176,7 @@ call dein#add('tpope/vim-rails')
 call dein#add('scrooloose/syntastic')
 call dein#add('fatih/vim-go')
 call dein#add('othree/yajs.vim')
+call dein#add('elixir-lang/vim-elixir')
 
 call dein#end()
 

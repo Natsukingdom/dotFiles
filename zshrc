@@ -1,5 +1,10 @@
 # このファイルは、.zshrc から source して 使用してください
 
+setopt share_history
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=50000
+export SAVEHIST=100000
+setopt EXTENDED_HISTORY
 export ZPLUG_HOME=/usr/local/opt/zplug
 source $ZPLUG_HOME/init.zsh
 fpath=(/usr/local/share/zsh-completions $fpath)
