@@ -5,7 +5,7 @@ export HISTFILE=${HOME}/.zsh_history
 export HISTSIZE=50000
 export SAVEHIST=100000
 setopt EXTENDED_HISTORY
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=${HOME}/.zplug
 source $ZPLUG_HOME/init.zsh
 fpath=(/usr/local/share/zsh-completions $fpath)
 
