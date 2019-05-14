@@ -155,6 +155,7 @@ call dein#add('Shougo/neomru.vim')
 call dein#add('Shougo/neosnippet-snippets')
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/unite-outline')
 call dein#add('Townk/vim-autoclose')
 call dein#add('Yggdroot/indentLine')
 call dein#add('airblade/vim-gitgutter')
@@ -269,3 +270,9 @@ function Lt_Percent_Completion()
 		return "\%"
 	end
 endf
+
+"goの補完について設定
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
