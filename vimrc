@@ -178,6 +178,7 @@ call dein#add('scrooloose/syntastic')
 call dein#add('fatih/vim-go')
 call dein#add('othree/yajs.vim')
 call dein#add('elixir-lang/vim-elixir')
+call dein#add('justmao945/vim-clang')
 
 call dein#end()
 
@@ -278,3 +279,15 @@ let g:go_highlight_structs = 1
 let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
 let g:go_gocode_unimported_packages = 1
 let g:go_def_mode = "gopls"
+
+"cの補完について設定
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.cpp =
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:neocomplete#force_omni_input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+let g:clang_auto = 0
+let g:clang_c_completeopt = 'menuone'
+let g:clang_cpp_completeopt = 'menuone'
