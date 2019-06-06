@@ -70,4 +70,4 @@ function rprompt-git-current-branch {
 alias bexec='bundle exec'
 
 # /alias
-bindkey -v
+bindkey -e
