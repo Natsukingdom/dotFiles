@@ -30,7 +30,14 @@ if ! zplug check --verbose; then
 fi
 zplug load --verbose
 
+# fzf関連
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+function select-history() {
+  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history
 
 # ブランチ名を色付きで表示させるメソッド
 function rprompt-git-current-branch {

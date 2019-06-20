@@ -2,6 +2,7 @@ syntax enable
 colorscheme solarized
 set background=dark
 set belloff=all
+set noro
 
 "バッファの設定-------------------------------------------
 set hidden
@@ -100,7 +101,7 @@ if has("autocmd")
     autocmd FileType c           setlocal sw=4 sts=4 ts=4 et
     autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
     autocmd FileType ruby        setlocal sw=2 sts=2 ts=2 et
-    autocmd FileType js          setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType js          setlocal sw=2 sts=2 ts=2 et
     autocmd FileType zsh         setlocal sw=4 sts=4 ts=4 et
     autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
     autocmd FileType scala       setlocal sw=4 sts=4 ts=4 et
@@ -110,6 +111,7 @@ if has("autocmd")
     autocmd FileType scss        setlocal sw=4 sts=4 ts=4 et
     autocmd FileType sass        setlocal sw=4 sts=4 ts=4 et
     autocmd FileType javascript  setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType typescript  setlocal sw=2 sts=2 ts=2 et
     autocmd FileType yaml        setlocal sw=2 sts=2 ts=2 et
     autocmd FileType markdown    setlocal sw=2 sts=2 ts=2 et
 endif
@@ -155,7 +157,8 @@ call dein#begin(s:dein_dir)
 :
 call dein#add('Shougo/dein.vim')
 call dein#add('Shougo/neocomplete.vim')
-call dein#add('Shougo/neomru.vim')
+"エラー検証
+"call dein#add('Shougo/neomru.vim')
 call dein#add('Shougo/neosnippet-snippets')
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/unite.vim')
@@ -187,6 +190,9 @@ call dein#add('pangloss/vim-javascript')
 call dein#add('maxmellon/vim-jsx-pretty')
 call dein#add('othree/javascript-libraries-syntax.vim')
 call dein#add('othree/es.next.syntax.vim')
+call dein#add('leafgarland/typescript-vim')
+call dein#add('junegunn/fzf.vim')
+call dein#add('Quramy/vim-js-pretty-template')
 
 call dein#end()
 
