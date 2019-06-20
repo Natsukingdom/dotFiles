@@ -18,6 +18,7 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-completions"
 zplug "mafredri/zsh-async"
 zplug "sindresorhus/pure"
+zplug "b4b4r07/enhancd", use:init.sh
 
 
 # (2) インストールする
@@ -71,3 +72,11 @@ alias bexec='bundle exec'
 
 # /alias
 bindkey -e
+
+# fzfでhistory
+function select-history() {
+  BUFFER=$(history -n -r 1 | fzf --no-sort +m --query "$LBUFFER" --prompt="History > ")
+  CURSOR=$#BUFFER
+}
+zle -N select-history
+bindkey '^r' select-history
