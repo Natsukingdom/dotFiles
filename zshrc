@@ -76,6 +76,7 @@ function rprompt-git-current-branch {
 # alias
 
 alias bexec='bundle exec'
+alias ls='ls -G'
 
 # /alias
 bindkey -e
