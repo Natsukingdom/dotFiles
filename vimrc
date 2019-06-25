@@ -306,3 +306,27 @@ let g:neocomplete#force_omni_input_patterns.c =
 let g:clang_auto = 0
 let g:clang_c_completeopt = 'menuone'
 let g:clang_cpp_completeopt = 'menuone'
+
+
+
+
+" 城所流 道場破り編
+let mapleader = "\<Space>"
+
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>f :Files<cr>
+nnoremap <leader>h :History<cr>
+nnoremap <leader>a :Ag <c-r><c-w>
+
+nnoremap <leader>* :AFS<cr>
+
+command! -bang -nargs=* -complete=file AFS call AFS('grep<bang>', <q-args>)
+function! AFS(cmd, args)
+  let search =  getreg('/')
+  " translate vim regular expression to perl regular expression.
+  let search = substitute(search,'\(\\<\|\\>\)','\\b','g')
+  "call fzf#vim#ag(a:cmd, '"' .  search .'" '. a:args)
+  "call fzf#vim#ag('"' .  search .'" '. a:args)
+  call fzf#vim#ag(search)
+endfunction
+" /城所流
