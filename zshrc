@@ -88,3 +88,14 @@ function select-history() {
 }
 zle -N select-history
 bindkey '^r' select-history
+
+# fzfでgit add
+fzf-add() {
+	local selected
+	selected="$(git diff --relative --name-only | fzf)"
+	if [ -n "$selected" ]; then
+		echo $selected
+		git add $selected
+	fi
+}
+alias fa="fzf-add"
