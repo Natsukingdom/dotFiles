@@ -16,7 +16,9 @@ set clipboard+=unnamed
 "mouse設定
 "---------------------------------------------------------
 set mouse=a
-set ttymouse=xterm2
+if !has('nvim')
+  set ttymouse=xterm2
+endif
 "----------------------------------------------------------
 " カーソル
 "----------------------------------------------------------
@@ -65,7 +67,7 @@ set fileencoding=utf-8 " 保存時の文字コード
 set fileencodings=ucs-boms,utf-8,euc-jp,shift-jis,cp932 " 読み込み時の文字コードの自動判別. 左側が優先される
 set fileformats=unix,dos,mac " 改行コードの自動判別. 左側が優先される
 set ambiwidth=double " □や○文字が崩れる問題を解決
-set guifont=Ricty\ Diminished\ Regular:h18
+set guifont="Ricty" Regular:h18
 
 "----------------------------------------------------------
 " ステータスライン
@@ -157,9 +159,7 @@ call dein#begin(s:dein_dir)
 
 :
 call dein#add('Shougo/dein.vim')
-call dein#add('Shougo/neocomplete.vim')
-"エラー検証
-"call dein#add('Shougo/neomru.vim')
+call dein#add('Shougo/neomru.vim')
 call dein#add('Shougo/neosnippet-snippets')
 call dein#add('Shougo/neosnippet.vim')
 call dein#add('Shougo/unite.vim')
@@ -172,13 +172,15 @@ call dein#add('kannokanno/previm')
 call dein#add('osyo-manga/vim-monster')
 "call dein#add('plasticboy/vim-markdown')
 call dein#add('scrooloose/nerdtree')
-call dein#add('todesking/ruby_hl_lvar.vim')
+if has('ruby')
+  call dein#add('todesking/ruby_hl_lvar.vim')
+  call dein#add('vim-ruby/vim-ruby')
+endif
 call dein#add('tomtom/tcomment_vim')
 call dein#add('tpope/vim-endwise')
 call dein#add('tpope/vim-fugitive')
 call dein#add('tyru/open-browser.vim')
 call dein#add('vim-airline/vim-airline')
-call dein#add('vim-ruby/vim-ruby')
 call dein#add('vim-scripts/AnsiEsc.vim')
 call dein#add('vim-scripts/grep.vim')
 call dein#add('tpope/vim-rails')
@@ -194,6 +196,12 @@ call dein#add('othree/es.next.syntax.vim')
 call dein#add('leafgarland/typescript-vim')
 call dein#add('junegunn/fzf.vim')
 call dein#add('Quramy/vim-js-pretty-template')
+call dein#add('Shougo/deoplete.nvim')
+if !has('nvim')
+  call dein#add('roxma/nvim-yarp')
+  call dein#add('roxma/vim-hug-neovim-rpc')
+endif
+let g:deoplete#enable_at_startup = 1
 
 call dein#end()
 
@@ -232,37 +240,13 @@ noremap <C-N> :Unite -buffer-name=file file<CR>
 "最近使ったファイル一覧
 noremap <C-Z> :Unite file_mru<CR>
 
-
-
-"neocomplete設定
-autocmd VimEnter * NeoCompleteEnable " Enable NeoComplete at startup
-
-" neocompleteにruby用の辞書ファイルを追加する
-let g:neocomplete#sources#dictionary#dictionaries = {
-            \   'ruby': $HOME . '/dicts/ruby.dict',
-            \ }
-
+" deopleteについて設定
+let g:deoplete#enable_at_startup = 1
 
 " ブランチ情報を表示する(airline)
 let g:airline#extensions#branch#enabled = 1
 
-" neocomplete と osyo-manga/vim-monster の 連携設定
-let g:neocomplete#sources#omni#input_patterns = {
-\   "ruby" : '[^. *\t]\.\w*\|\h\w*::',
-\}
-" neocomplete_cache
-let g:neocomplcache_enable_at_startup = 1
 
-" Rsense用の設定
-if !exists('g:neocomplcache_omni_patterns')
-    let g:neocomplcache_omni_patterns = {}
-endif
-let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-
-"rsenseのインストールフォルダがデフォルトと異なるので設定
-let g:rsenseHome = expand("~/.rbenv/shims/rsense")
-let g:rsenseUseOmniFunc = 1
 " vim-markdownの設定
 let g:vim_markdown_folding_disabled = 1
 
@@ -291,23 +275,13 @@ endf
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
-let g:neocomplete#sources#omni#input_patterns.go = '\h\w\.\w*'
 let g:go_gocode_unimported_packages = 1
 let g:go_def_mode = "gopls"
 
 "cの補完について設定
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.cpp =
-    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:neocomplete#force_omni_input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
 let g:clang_auto = 0
 let g:clang_c_completeopt = 'menuone'
 let g:clang_cpp_completeopt = 'menuone'
-
-
 
 
 " 城所流 道場破り編

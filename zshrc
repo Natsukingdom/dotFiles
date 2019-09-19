@@ -1,4 +1,4 @@
-# このファイルは、.zshrc から source して 使用してください
+# シンボリックリンクで利用してください
 
 setopt share_history
 export HISTFILE=${HOME}/.zsh_history
@@ -88,6 +88,9 @@ function select-history() {
 }
 zle -N select-history
 bindkey '^r' select-history
+
+# fzfのデフォルトコマンド
+# alias vzv="nvim $(fzf)"
 
 # fzfでgit add
 fzf-add() {

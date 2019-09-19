@@ -17,3 +17,9 @@ export PATH="$HOME/go/bin:$PATH"
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 export PATH="$HOME/.exenv/bin:$PATH"
 eval "$(exenv init -)"
+
+# anyenv用
+eval "$(anyenv init -)"
+
+# mysql-client
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
