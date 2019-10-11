@@ -9,6 +9,9 @@ export ZPLUG_HOME=${HOME}/.zplug
 source $ZPLUG_HOME/init.zsh
 fpath=(/usr/local/share/zsh-completions/src $fpath)
 
+# LANG設定
+export LANG=en_US.UTF-8
+
 # pure の設定
 autoload -U promptinit; promptinit
 

@@ -23,3 +23,7 @@ eval "$(anyenv init -)"
 
 # mysql-client
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+
+# goenv
+export PATH="$HOME/.goenv/bin:$PATH"
+eval "$(goenv init -)"

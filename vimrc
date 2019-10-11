@@ -1,9 +1,3 @@
-syntax enable
-colorscheme solarized
-set background=dark
-set belloff=all
-set noro
-
 "バッファの設定-------------------------------------------
 set hidden
 "---------------------------------------------------------
@@ -107,7 +101,7 @@ if has("autocmd")
     autocmd FileType zsh         setlocal sw=4 sts=4 ts=4 et
     autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
     autocmd FileType scala       setlocal sw=4 sts=4 ts=4 et
-    autocmd FileType json        setlocal sw=4 sts=4 ts=4 et
+    autocmd FileType json        setlocal sw=2 sts=2 ts=2 et
     autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
     autocmd FileType css         setlocal sw=4 sts=4 ts=4 et
     autocmd FileType scss        setlocal sw=4 sts=4 ts=4 et
@@ -142,7 +136,7 @@ nnoremap <silent> <C-]> :call fzf#vim#tags(expand('<cword>'))<CR>
 "----------------------------------------------------------
 "以下バンドル管理
 "----------------------------------------------------------
-let s:dein_dir = expand('~/.vim/dein')
+let s:dein_dir = expand('~/.config/nvim/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 if &compatible
@@ -169,8 +163,6 @@ call dein#add('Yggdroot/indentLine')
 call dein#add('airblade/vim-gitgutter')
 call dein#add('godlygeek/tabular')
 call dein#add('kannokanno/previm')
-call dein#add('osyo-manga/vim-monster')
-"call dein#add('plasticboy/vim-markdown')
 call dein#add('scrooloose/nerdtree')
 if has('ruby')
   call dein#add('todesking/ruby_hl_lvar.vim')
@@ -179,28 +171,31 @@ endif
 call dein#add('tomtom/tcomment_vim')
 call dein#add('tpope/vim-endwise')
 call dein#add('tpope/vim-fugitive')
-call dein#add('tyru/open-browser.vim')
 call dein#add('vim-airline/vim-airline')
 call dein#add('vim-scripts/AnsiEsc.vim')
 call dein#add('vim-scripts/grep.vim')
 call dein#add('tpope/vim-rails')
-call dein#add('scrooloose/syntastic')
 call dein#add('fatih/vim-go')
 call dein#add('elixir-lang/vim-elixir')
 call dein#add('justmao945/vim-clang')
-call dein#add('othree/yajs.vim')
-call dein#add('pangloss/vim-javascript')
-call dein#add('maxmellon/vim-jsx-pretty')
-call dein#add('othree/javascript-libraries-syntax.vim')
-call dein#add('othree/es.next.syntax.vim')
-call dein#add('leafgarland/typescript-vim')
 call dein#add('junegunn/fzf.vim')
-call dein#add('Quramy/vim-js-pretty-template')
 call dein#add('Shougo/deoplete.nvim')
-if !has('nvim')
-  call dein#add('roxma/nvim-yarp')
-  call dein#add('roxma/vim-hug-neovim-rpc')
-endif
+call dein#add('roxma/nvim-yarp')
+call dein#add('roxma/vim-hug-neovim-rpc')
+call dein#add('iCyMind/NeoSolarized')
+"
+" JS関連
+call dein#add('prettier/vim-prettier', {'build': 'npm install', 'on_ft': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html']})
+call dein#add('othree/es.next.syntax.vim')
+call dein#add('othree/javascript-libraries-syntax.vim')
+call dein#add('othree/yajs.vim')
+call dein#add('maxmellon/vim-jsx-pretty')
+call dein#add('neovim/node-host', { 'build': 'npm install' })
+call dein#add('billyvg/tigris.nvim', { 'build': './install.sh' })
+call dein#add('elzr/vim-json')
+call dein#add('Quramy/vim-js-pretty-template')
+call dein#add('leafgarland/typescript-vim')
+call dein#add('othree/html5.vim')
 let g:deoplete#enable_at_startup = 1
 
 call dein#end()
@@ -218,14 +213,6 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 " Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
 " For conceal markers.
 if has('conceal')
     set conceallevel=2 concealcursor=niv
@@ -270,6 +257,18 @@ function Lt_Percent_Completion()
 		return "\%"
 	end
 endf
+
+" colorschemeの設定
+set termguicolors
+syntax enable
+colorscheme NeoSolarized
+set background=dark
+set belloff=all
+set noro
+
+" 見え方について設定
+set conceallevel=0
+let g:vim_json_syntax_conceal=0
 
 "goの補完について設定
 let g:go_highlight_functions = 1
