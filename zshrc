@@ -7,7 +7,7 @@ export SAVEHIST=100000
 setopt EXTENDED_HISTORY
 export ZPLUG_HOME=${HOME}/.zplug
 source $ZPLUG_HOME/init.zsh
-fpath=(/usr/local/share/zsh-completions/src $fpath)
+fpath=(/usr/local/share/zsh-completions $fpath)
 
 # LANG設定
 export LANG=en_US.UTF-8
@@ -105,3 +105,21 @@ fzf-add() {
 	fi
 }
 alias fa="fzf-add"
+
+alias sed="gsed"
+
+# githubのプルリク画面へ移動できるコマンド
+function open-github-pr() {
+    export IFS='/'
+    # gitリポジトリではない、また、Githubをホストにしていない場合には処理を點せたくないがうまく行ってない。
+    # とりあえず仕事なので放置する.
+    $(git status); if [[ $? = 128 ]]; then   echo 'Gitリポジトリではありません'; return 1; fi;
+    current_branch_name=$(git branch | grep \* | sed -e 's/*//g' -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')
+    base_url='https://github.com'
+    owner_and_repository=$(git remote -v | sed -n '1p' | sed -e 's/origin\|git@github.com\:\|\.git\|(.*//g' -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')
+    echo $owner_and_repository | (read owner repository; echo 'プルリクエストの新規作成画面へ移動します'; open "${base_url}/${owner}/${repository}/pull/new/${current_branch_name}")
+    export IFS=' 	
+'
+}
+
+alias opr='open-github-pr'

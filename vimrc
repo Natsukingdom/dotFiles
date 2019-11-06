@@ -110,6 +110,7 @@ if has("autocmd")
     autocmd FileType typescript  setlocal sw=2 sts=2 ts=2 et
     autocmd FileType yaml        setlocal sw=2 sts=2 ts=2 et
     autocmd FileType markdown    setlocal sw=2 sts=2 ts=2 et
+    autocmd FileType sql    setlocal sw=2 sts=2 ts=2 et
 endif
 
 "----------------------------------------------------------
@@ -196,6 +197,7 @@ call dein#add('elzr/vim-json')
 call dein#add('Quramy/vim-js-pretty-template')
 call dein#add('leafgarland/typescript-vim')
 call dein#add('othree/html5.vim')
+call dein#add('vim-syntastic/syntastic.git')
 let g:deoplete#enable_at_startup = 1
 
 call dein#end()
@@ -237,7 +239,18 @@ let g:airline#extensions#branch#enabled = 1
 " vim-markdownの設定
 let g:vim_markdown_folding_disabled = 1
 
-"rubocopを自動的, scrooloose/syntastic連携
+" syntastic設定
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_javascript_checkers = ['eslint']
+
+"rubocopを自動的,syntastic連携
 let g:syntastic_mode_map = { 'mode': 'passive',
             \ 'passive_filetypes': ['ruby'] }
 let g:syntastic_ruby_checkers = ['rubocop']
