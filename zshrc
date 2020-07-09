@@ -113,7 +113,7 @@ function open-github-pr() {
     export IFS='/'
     # gitリポジトリではない、また、Githubをホストにしていない場合には処理を點せたくないがうまく行ってない。
     # とりあえず仕事なので放置する.
-    $(git status); if [[ $? = 128 ]]; then   echo 'Gitリポジトリではありません'; return 1; fi;
+    # $(git status); if [[ $? = 128 ]]; then   echo 'Gitリポジトリではありません'; return 1; fi;
     current_branch_name=$(git branch | grep \* | sed -e 's/*//g' -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')
     base_url='https://github.com'
     owner_and_repository=$(git remote -v | sed -n '1p' | sed -e 's/origin\|git@github.com\:\|\.git\|(.*//g' -e 's/^[ \t]*//g' -e 's/[ \t]*$//g')
